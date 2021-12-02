@@ -1,0 +1,161 @@
+package Day9;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Scanner;
+
+public class Products {
+    int s_no;
+    String name;
+    int quantity;
+    double price;
+    static Scanner sc=new Scanner(System.in);
+   static List<Products> Products=new ArrayList<>();
+   static Products product;
+
+    public Products(int s_no, String name, int quantity, double price) {
+        this.s_no = s_no;
+        this.name = name;
+        this.quantity = quantity;
+        this.price = price;
+    }
+
+    public int gets_no() {
+        return s_no;
+    }
+
+    public void sets_no(int s_no) {
+        this.s_no = s_no;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public int getQuantity() {
+        return quantity;
+    }
+
+    public void setQuantity(int quantity) {
+        this.quantity = quantity;
+    }
+
+    public double getPrice() {
+        return price;
+    }
+
+    public void setPrice(double price) {
+        this.price = price;
+    }
+
+    @Override
+    public String toString() {
+        return "Products{" +
+                "s_no=" + s_no +
+                ", name='" + name + '\'' +
+                ", quantity=" + quantity +
+                ", price=" + price +
+                '}';
+    }
+    public static void main(String[] args)
+    {
+        int choice=0;
+        do{
+        System.out.println("Enter your choice\n1.Add\n2.Search\n3.Edit\n4.Remove\n5.exit");
+        choice=sc.nextInt();
+
+            switch (choice) {
+                case 1: {
+                    System.out.println("Add product");
+                    addProducts();
+                    break;
+                }
+                case 2: {
+                    System.out.println("Search whether product is present ");
+                    searchProduct(Products);
+                    break;
+                }
+                case 3:
+                {
+                    editProduct(Products);
+                    break;
+                }
+                case 4:
+                {
+                    removeProduct(Products);
+                    break;
+                }
+                case 5:System.out.println("Exit.....");
+
+            }
+        }while(choice!=5);
+
+
+    }
+
+    private static void removeProduct(List<Products> Products) {
+        System.out.println("Enter the product ");
+        String name=sc.next();
+        for(int i=0;i< Products.size();i++)
+        {
+            product=Products.get(i);
+            if(product.getName().equals(name))
+            {
+                Products.remove(product);
+                System.out.println("Removed succesfully");
+                System.out.println(Products);
+            }
+        }
+
+    }
+
+    private static void editProduct(List<Products> Products) {
+        System.out.println("Enter the product name ");
+        String name=sc.next();
+        for(int i=0;i< Products.size();i++)
+        {
+            product=Products.get(i);
+            if(product.getName().equals(name))
+            {
+                System.out.println("Enter price ");
+                int price=sc.nextInt();
+                product.setPrice(price);
+                System.out.println(product);
+            }
+
+        }
+    }
+
+    private static void searchProduct(List<Products> Products) {
+        System.out.println("Enter the name of the product ");
+        String name=sc.next();
+        for(int i=0;i<Products.size();i++)
+        {
+            product=Products.get(i);
+            if(product.getName().equals(name))
+            {
+                System.out.println(product);
+            }
+        }
+    }
+
+
+    private static void addProducts() {
+        System.out.println("Enter the serial number");
+        int s_no=sc.nextInt();
+        System.out.println("Enter product name ");
+        String name=sc.next();
+        System.out.println("Enter quantity ");
+        int quantity=sc.nextInt();
+        System.out.println("Enter price ");
+        double price=sc.nextDouble();
+        product=new Products(s_no,name,quantity,price);
+        Products.add(product);
+        System.out.println("Added succesfully");
+
+    }
+}
